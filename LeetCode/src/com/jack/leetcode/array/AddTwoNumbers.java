@@ -1,5 +1,8 @@
 package com.jack.leetcode.array;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 给出两个 非空 的链表用来表示两个非负的整数。
  * 其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储一位数字。
@@ -23,6 +26,28 @@ public class AddTwoNumbers {
 		ListNode(int x) {
 			val = x;
 		}
+
+		@Override
+		public String toString() {
+			return "ListNode{" +
+					"val=" + val +
+					", next=" + next +
+					'}';
+		}
+	}
+
+	public static int nodeToNum(ListNode node) {
+		if (node == null) {
+			return 0;
+		}
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append(node.val);
+		ListNode next = node.next;
+		while (next != null) {
+			stringBuffer.append(next.val);
+			next = next.next;
+		}
+		return Integer.valueOf(stringBuffer.reverse().toString());
 	}
 
 	public static void main(String[] args) {
@@ -42,24 +67,24 @@ public class AddTwoNumbers {
 
 	}
 
+	public static ListNode intToNode(int temp) {
+		int ret = temp % 10;
+		temp = temp / 10;
+		List<ListNode> list = new ArrayList<>();
+		list.add(new ListNode(ret));
+		while (temp != 0) {
+			ret = temp % 10;
+			list.add(new ListNode(ret));
+			temp = temp / 10;
+		}
+		for (int i = 0; i < list.size() - 1; i++) {
+			list.get(i).next = list.get(i + 1);
+		}
+		return list.get(0);
+	}
 
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-		ListNode dummyHead = new ListNode(0);
-		ListNode p = l1, q = l2, curr = dummyHead;
-		int carry = 0;
-		while (p != null || q != null) {
-			int x = (p != null) ? p.val : 0;
-			int y = (q != null) ? q.val : 0;
-			int sum = carry + x + y;
-			carry = sum / 10;
-			curr.next = new ListNode(sum % 10);
-			curr = curr.next;
-			if (p != null) p = p.next;
-			if (q != null) q = q.next;
-		}
-		if (carry > 0) {
-			curr.next = new ListNode(carry);
-		}
-		return dummyHead.next;
+		int ret = nodeToNum(l1) + nodeToNum(l2);
+		return intToNode(ret);
 	}
 }
