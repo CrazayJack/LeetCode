@@ -46,6 +46,7 @@ public class AddTwoNumbers {
 		while (next != null) {
 			stringBuffer.append(next.val);
 			next = next.next;
+			System.out.println("test");
 		}
 		return Integer.valueOf(stringBuffer.reverse().toString());
 	}
