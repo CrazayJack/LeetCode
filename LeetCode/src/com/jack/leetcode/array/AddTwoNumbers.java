@@ -14,77 +14,78 @@ import java.util.List;
  * 原因：342 + 465 = 807
  * 来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/add-two-numbers
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
- *LeetCodeAddTwoNumbers
+ * LeetCodeAddTwoNumbers
+ *
  * @author CrazyJack
  * @date 2020/05/11/21:03
  */
 public class AddTwoNumbers {
-	static class ListNode {
-		int val;
-		ListNode next;
+    static class ListNode {
+        int val;
+        ListNode next;
 
-		ListNode(int x) {
-			val = x;
-		}
+        ListNode(int x) {
+            val = x;
+        }
 
-		@Override
-		public String toString() {
-			return "ListNode{" +
-					"val=" + val +
-					", next=" + next +
-					'}';
-		}
-	}
+        @Override
+        public String toString() {
+            return "ListNode{" +
+                    "val=" + val +
+                    ", next=" + next +
+                    '}';
+        }
+    }
 
-	public static int nodeToNum(ListNode node) {
-		if (node == null) {
-			return 0;
-		}
-		StringBuffer stringBuffer = new StringBuffer();
-		stringBuffer.append(node.val);
-		ListNode next = node.next;
-		while (next != null) {
-			stringBuffer.append(next.val);
-			next = next.next;
-		}
-		return Integer.valueOf(stringBuffer.reverse().toString());
-	}
+    public static int nodeToNum(ListNode node) {
+        if (node == null) {
+            return 0;
+        }
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(node.val);
+        ListNode next = node.next;
+        while (next != null) {
+            stringBuffer.append(next.val);
+            next = next.next;
+        }
+        return Integer.valueOf(stringBuffer.reverse().toString());
+    }
 
-	public static void main(String[] args) {
-		ListNode listNode = new ListNode(2);
-		ListNode list2Node = new ListNode(4);
-		ListNode list3Node = new ListNode(3);
-		listNode.next = list2Node;
-		list2Node.next = list3Node;
+    public static void main(String[] args) {
+        ListNode listNode = new ListNode(2);
+        ListNode list2Node = new ListNode(4);
+        ListNode list3Node = new ListNode(3);
+        listNode.next = list2Node;
+        list2Node.next = list3Node;
 
-		ListNode list4Node = new ListNode(5);
-		ListNode list5Node = new ListNode(6);
-		ListNode list6Node = new ListNode(4);
-		list4Node.next = list5Node;
-		list5Node.next = list6Node;
-		ListNode listNode1 = addTwoNumbers(listNode, list4Node);
-		System.out.println(listNode1);
+        ListNode list4Node = new ListNode(5);
+        ListNode list5Node = new ListNode(6);
+        ListNode list6Node = new ListNode(4);
+        list4Node.next = list5Node;
+        list5Node.next = list6Node;
+        ListNode listNode1 = addTwoNumbers(listNode, list4Node);
+        System.out.println(listNode1);
 
-	}
+    }
 
-	public static ListNode intToNode(int temp) {
-		int ret = temp % 10;
-		temp = temp / 10;
-		List<ListNode> list = new ArrayList<>();
-		list.add(new ListNode(ret));
-		while (temp != 0) {
-			ret = temp % 10;
-			list.add(new ListNode(ret));
-			temp = temp / 10;
-		}
-		for (int i = 0; i < list.size() - 1; i++) {
-			list.get(i).next = list.get(i + 1);
-		}
-		return list.get(0);
-	}
+    public static ListNode intToNode(int temp) {
+        int ret = temp % 10;
+        temp = temp / 10;
+        List<ListNode> list = new ArrayList<>();
+        list.add(new ListNode(ret));
+        while (temp != 0) {
+            ret = temp % 10;
+            list.add(new ListNode(ret));
+            temp = temp / 10;
+        }
+        for (int i = 0; i < list.size() - 1; i++) {
+            list.get(i).next = list.get(i + 1);
+        }
+        return list.get(0);
+    }
 
-	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-		int ret = nodeToNum(l1) + nodeToNum(l2);
-		return intToNode(ret);
-	}
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int ret = nodeToNum(l1) + nodeToNum(l2);
+        return intToNode(ret);
+    }
 }
