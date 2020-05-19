@@ -4,39 +4,27 @@ package com.jack.leetcode.string;
  * @author CrazyJack
  */
 public class ValidPalindrome {
+    int del = 0;  //记录删除的字符次数
 
-    public static boolean validPalindrome(String s) {
-        int length = s.length();
-        StringBuffer temp = new StringBuffer();
-        for (int i = 0; i < length; i++) {
-            temp.append(s.charAt(i));
-        }
-        if (temp.toString().equals(temp.reverse().reverse().toString())) {
-            return true;
-        }
-
-        int leakPoint = 0;
-        for (int i = 0; i < length; i++) {
-            StringBuffer stringBuffer = new StringBuffer();
-            for (int j = 0; j < length; j++) {
-                if (j != leakPoint) {
-                    stringBuffer.append(s.charAt(j));
+    public boolean validPalindrome(String s) {
+        int i = 0, j = s.length() - 1;
+        while (i < j) {
+            if (s.charAt(i) == s.charAt(j)) {
+                i++;
+                j--;
+            } else {
+                //不相等的话，若没有删除字符，则删除左边或右边的字符再判断；若删除过一次，则不是回文串
+                if (del == 0) {
+                    del++;
+                    return validPalindrome(s.substring(i, j)) || validPalindrome(s.substring(i + 1, j + 1));
                 }
+                return false;
             }
-            String asc = stringBuffer.toString();
-            String desc = stringBuffer.reverse().toString();
-            System.out.println("asc -->" + asc);
-            System.out.println("desc -->" + desc);
-            if (asc.length() > 1 && asc.equals(desc)) {
-                return true;
-            }
-            leakPoint++;
         }
-        return false;
+        return true;
     }
 
     public static void main(String[] args) {
-        System.out.println(validPalindrome("yd"));
 
     }
 }
