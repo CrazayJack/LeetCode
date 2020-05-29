@@ -1,8 +1,5 @@
 package com.jack.leetcode.array;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 给出两个 非空 的链表用来表示两个非负的整数。
  * 其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储一位数字。
@@ -15,7 +12,7 @@ import java.util.List;
  * 来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/add-two-numbers
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  *
- * @author CrazyJack
+ * @author CrazyJack262
  * @date 2020/05/11/21:03
  */
 public class LeetCodeAddTwoNumbers {
