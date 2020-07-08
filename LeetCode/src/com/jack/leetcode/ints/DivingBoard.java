@@ -34,19 +34,16 @@ public class DivingBoard {
         if (k == 0) {
             return new int[0];
         }
-        int sum = 0;
-        Set<Integer> integerSet = new TreeSet<>();
+        if (shorter == longer) {
+            return new int[]{shorter * k};
+        }
+        int sum;
         int[] ret = new int[k + 1];
         for (int i = 0; i <= k; i++) {
             sum = (k - i) * shorter + i * longer;
-            integerSet.add(sum);
+            ret[i] = sum;
         }
-        Integer[] y = integerSet.toArray(new Integer[integerSet.size()]);
-        int[] a = new int[y.length];
-        for (int i = 0; i < y.length; i++) {
-            a[i] = y[i];
-        }
-        return a;
+        return ret;
     }
 
     public static void main(String[] args) {
